@@ -150,9 +150,10 @@ a:visited {
 
 #toc-frame {
   border: none;
-  width: 100%;
+  width: 100% !important;
   height: 860px;
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
 
