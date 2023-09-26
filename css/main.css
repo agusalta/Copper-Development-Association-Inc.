@@ -150,15 +150,9 @@ a:visited {
 
 #toc-frame {
   border: none;
-  min-width: 100%;
-  min-height: 890px;
-  overflow-y: scroll;
+  width: 100%;
+  height: 860px;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
-
-@media (max-width: 768px) {
-  #toc-frame {
-    width: 100%; 
-  }
-}
