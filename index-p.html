@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>Presurre Lost Calculator</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/toc.css">
+	<link rel="stylesheet" href="css/data-table.css">
+	<link rel="stylesheet" href="css/tabs.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+  <!-- Primary Page Layout -->
+  <div class="container">
+		<div class="row"><img alt="Copper.org" id="logo" src="images/cda-logo.svg"></div>
+		<div class="row" style='text-align:center;margin-top: 25px;'>
+			<h4>Pressure&nbsp;Loss&nbsp;Calculator</h4>
+		</div>
+    <div class="row">
+      <div class="one-half column">
+				<form action="">
+					<div class="row">
+						<input type="text" style='width:80%;' name="flow" placeholder='Flow Rate (0.1 - 5.0)' onchange="calc_pipefriction( this.form )">
+						<input type="hidden" name="flowUnits" value="1"> <b>g.p.m.</b>
+						<!--select name="flowUnits" onchange="calc_pipefriction( this.form )">
+							<option value="1" selected="selected">gpm</option>
+							<option value="448.8312">cfs</option>
+							<option value="18.85714">acre-in/day</option>
+							<option value="452.5714">acre-in/hour</option>
+							<option value="226.2857">acre-ft/day</option>
+							<option value="15.85032">lps</option>
+							<option value="15850.32">cms</option>
+						</select-->
+					</div>
+
+					<div class="row">
+						<!--input type="text" name="diameter" placeholder="Inner Diameter" onchange="calc_pipefriction( this.form )"-->
+						<select name="diameter" style='width:80%;' onchange="calc_pipefriction( this.form )">
+							<option value=".25" selected="selected">1/4</option>
+							<option value="">3/8</option>
+							<option value=".5">1/2</option>
+							<option value=".75">3/4</option>
+							<option value="1">1</option>
+							<option value="1.25">1-1/4</option>
+							<option value="1.5">1-1/2</option>
+							<option value="2">2</option>
+							<option value="2.5">2-1/2</option>
+							<option value="3">3</option>
+							<option value="3.5">3-1/2</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="8">8</option>
+							<option value="10">10</option>
+							<option value="12">12</option>
+						</select-->
+						<input type="hidden" name="diameterUnits" value="2.54"> <b>inches</b>
+						<!--select name="diameterUnits" onchange="calc_pipefriction( this.form )">
+							<option value="2.54" selected="selected">in</option>
+							<option value="30.48">ft</option>
+							<option value=".1">mm</option>
+							<option value="1">cm</option>
+							<option value="100">m</option>
+						</select-->
+					</div>
+
+					<div class="row">
+						<input type="text" name="length" style='width:80%;' placeholder='Pipe Length' onchange="calc_pipefriction( this.form )">
+						<select name="lengthUnits" onchange="calc_pipefriction( this.form )">
+							<option value="1" selected="selected">ft</option>
+							<option value="0.08333333333">in</option>
+							<option value="3.28083989501">m</option>
+						</select>
+					</div>
+
+					<div class="row">
+						<select id="xxx" style='width:80%;' name="xxx" onchange="getOption( this.form )">
+							<option value="col-k">K</option>
+							<option value="col-l">L</option>
+							<option value="col-m">M</option>
+							<option value="col-d">DVW</option>
+						</select>
+					</div>
+
+					<div class="row">
+						<input type="hidden" name="material" value="150">
+						<!--select name="material" onchange="calc_pipefriction( this.form )">
+							<option value="150">Copper</option>
+							<option value="150">Plastic</option>
+							<option value="145">Epoxy coated steel</option>
+							<option value="140">Cement asbestos</option>
+							<option value="135">Galvanized steel</option>
+							<option value="130">New steel</option>
+							<option value="120">Aluminum with couplers</option>
+							<option value="100">15 year old steel</option>
+						</select>-->
+					</div>
+
+					<div class="row">
+						<input type="button" style="width: 80%;" id="pressure-Loss-Calculate" value="Calculate" onclick="calc_pipefriction( this.form )">
+					</div>
+
+					<div class="row">
+						<input type="text" name="pressureLoss" style='width:80%;'  placeholder='Pressure Loss'> <b>psi</b>
+						<input type="hidden" name="pressureLossUnits" value="1">
+						<!--select name="pressureLossUnits" onchange="calc_pipefriction( this.form )">
+							<option value="1" selected="selected">psi</option>
+							<option value="6.8947625">kPa</option>
+							<option value="2.306661407">feet of water</option>
+							<option value="0.068947573">bar</option>
+							<option value=".70309">m of water</option>
+						</select-->
+					</div>
+				</form>
+				</div>
+					<div class="one-half column">
+						<p><div class='steps' style='float:left;margin-right: 10px;'><b>STEP 1:</b></div><div class='steps' style='display:contents;'>Input your calculation variables into the fields to the left and click the calculate button.</div></p>
+						<p><div class='steps' style='float:left;margin-right: 10px;'><b>STEP 2:</b></div><div class='steps'>Review the results in the sizing table below.</div></p>
+						<p><div class='steps' style='float:left;margin-right: 10px;'><b>STEP 3:</b></div><div class='steps'>Scroll down to the Copper Tube Handbook at the bottom and navigate to the section you need.</div></p>
+					</div>
+				</div>
+
+				<div class='row' style="padding-bottom: 3rem;">
+					<!-- Tab links -->
+					<div class="tab">
+						<button class="tablinks" onclick="openTab(event, 'K')">K</button>
+						<button class="tablinks" onclick="openTab(event, 'L')">L</button>
+						<button class="tablinks" onclick="openTab(event, 'M')">M</button>
+					</div>
+
+					<!-- Tab content -->
+					<div id="K" class="tabcontent active" style='border:none;padding:0;display: block;'>
+						<div id="k_pages">
+							<iframe id="scaled-frame-k" class="scaled-frame" src="k.html" style='border:none;height:450px;'></iframe>
+						</div>
+					</div>
+
+					<div id="L" class="tabcontent" style='border:none;padding:0;'>
+						<iframe id="scaled-frame-l" class="scaled-frame" src="l.html" style='border:none;height:450px;'></iframe>
+					</div>
+
+					<div id="M" class="tabcontent" style='border:none;padding:0;'>
+						<iframe id="scaled-frame-m" class="scaled-frame" src="m.html" style='border:none;height:450px;'></iframe>
+					</div>
+
+					<div id="D" class="tabcontent" style='border:none;padding:0;'>
+						<iframe class="scaled-frame" style='border: none;height:450px;'></iframe>
+					</div>
+					<div id="V" class="tabcontent" style='border:none;padding:0;'>
+						<iframe class="scaled-frame"  style='border: none;height:450px;'></iframe>
+					</div>
+					<div id="W" class="tabcontent" style='border:none;padding:0;'>
+						<iframe class="scaled-frame"  style='border: none;height:450px;'></iframe>
+					</div>
+				
+				</div>		
+				<div class='row'>
+					<div class="parent" style="display: flex; justify-content: center; align-items: center; ">
+						<iframe id="pdf-content-frame" src="https://copper.org/publications/pub_list/pdf/copper_tube_handbook.pdf#page=1&zoom=100&toolbar=1"></iframe>	
+					</div>
+
+				<style>
+
+						#pdf-content-frame {
+							border: none;
+							min-width: 100%;
+							min-height: 800px;
+							overflow-y: hidden;
+							overflow-x: hidden;
+						}
+
+						.parent {
+							display: grid;
+							grid-template-columns: repeat(2, 1fr);
+							grid-template-rows: 1fr;
+							grid-column-gap: 3px;
+							grid-row-gap: 0px;
+						}
+						
+						@media (max-width: 768px) {
+							.parent {
+								grid-template-columns: 1fr !important; 
+								grid-row-gap: 10px !important; 
+								flex-direction: column;
+								align-items: center;
+							}
+							
+							#toc-frame, #pdf-content-frame {
+								width: 100%; 
+								
+							}
+						}
+					</style>
+				</style>
+
+				</div>
+
+				<script type="text/javascript">
+
+				var strFooter;
+				strFooter = getFooter();
+				document.write(strFooter);
+
+
+				var frame = document.getElementById("scaled-frame");
+
+				frame.style.height = frame.contentWindow.document.body.scrollHeight + 'px';
+					frame.style.width = frame.contentWindow.document.body.scrollWidth+'px';
+							alert('ping');
+
+				</script>
+      </div>
+    </div>
+
+
+  </div>
+	<!-- End Document -->
+	<script type="text/javascript" src="js/tabs.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+</body>
+</html>

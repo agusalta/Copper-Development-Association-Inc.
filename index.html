@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>Copper Tube Sizing Calculator</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS -->
+  	<link rel="stylesheet" href="css/normalize.css">
+  	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/toc.css">
+	<link rel="stylesheet" href="css/data-table.css">
+	<link rel="stylesheet" href="css/tabs.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+  <!-- Primary Page Layout -->
+  <div class="container">
+		<div class="row"><img alt="Copper.org" id="logo" src="images/cda-logo.svg"></div>
+		<div class="row" style='text-align:center; margin-top: 25px;'>
+			<h4>Copper&nbsp;Tube&nbsp;Sizing&nbsp;Calculator</h4>
+		</div>
+	
+	<div class="row">	
+		<div>
+			<div style="text-align: justify; ">
+				<div style='float:left;margin-right: 10px; color: #986; font-weight: bold;'><b>NOTICE: </b></div>
+				<p style='display:contents; overflow-wrap: break-word;'>
+					This copper tube sizing instruction booklet and calculator have been prepared for the use of journeymen, 
+					plumbing and heating contractors, engineers, and others involved in the design or installation of fire-sprinkler,
+					plumbing, or solar heating systems. They have been compiled from information sources that 
+					the <strong style="color: #986;">Copper Development Association Inc.</strong> believes to be competent. However, recognizing that each system must be designed and installed
+					to meet particular circumstances, CDA assumes no responsibility or liability of any kind in connection with this
+					booklet and calculator or their use by any person or organization and makes no representations or warranties of any
+					kind thereby.
+				</p>
+
+				<div >
+					<p><div class='steps' style='float:left;margin-right: 10px; list-style: none;'><b style="font-weight: bold;">STEP 1:</b></div><div style='display:contents;'> Input your calculation variables into the fields and click the calculate button.</div></p>
+					<p><div class='steps' style='float:left;margin-right: 10px;'><b style="font-weight: bold;">STEP 2:</b></div><div>Review the results in the sizing table below.</div></p>
+					<p><div class='steps' style='float:left;margin-right: 10px;'><b style="font-weight: bold;">STEP 3:</b></div><div >Scroll down to the <strong style="color: #986;"> <a href="#section-4" style="color:#004153 ;">Copper Tube Handbook</a></strong> at the bottom and navigate to the section you need.</div></p>
+				</div> 
+			</div>
+			<hr>
+
+		</div>
+	<div class="row">
+      
+	<div class="one-half column">
+				<form action="" class="form">
+				<section id="section-2" class="section">
+					<div class="row">
+						<b>Flow Rate (GPM)</b><br>
+						<input type="text" style='width:80%;' name="flow" placeholder='Flow Rate (-0.1 - 5.0+)' value="0.0" onchange="getOption(this.form)">
+						<input type="hidden" name="flowUnits" value='1'>
+<!--
+						<select name="flowUnits" onchange="getOption( this.form )">
+							<option value="1" selected="selected">g.p.m.</option>
+							<option value="448.8312">cfs</option>
+							<option value="18.85714">acre-in/day</option>
+							<option value="452.5714">acre-in/hour</option>
+							<option value="226.2857">acre-ft/day</option>
+							<option value="15.85032">lps</option>
+							<option value="15850.32">cms</option>
+						</select>
+-->
+						<input type="hidden" name="flowRate" value="7.481">
+						<input type="hidden" name="flowRateUnits" value="1">
+					</div>
+
+					<div class="row">
+					 <b>Nominal Tube Size (inches)</b><br>
+						<!--input type="text" name="diameter" placeholder="Inner Diameter" onchange="getOption( this.form )"-->
+						<select id="diameter" name="diameter" style='width:80%;' onchange="getOption( this.form )">
+							<option value="0.250" selected="selected">1/4</option>
+							<option value="0.375">3/8</option>
+							<option value="0.500">1/2</option>
+							<option value="0.625">5/8</option>
+							<option value="0.750">3/4</option>
+							<option value="1.000">1</option>
+							<option value="1.250">1-1/4</option>
+							<option value="1.500">1-1/2</option>
+							<option value="2.000">2</option>
+							<option value="2.500">2-1/2</option>
+							<option value="3.000">3</option>
+							<option value="3.500">3-1/2</option>
+							<option value="4.000">4</option>
+							<option value="5.000">5</option>
+							<option value="6.000">6</option>
+							<option value="8.000">8</option>
+							<option value="10.000">10</option>
+						</select> <b>in</b>
+						<input type="hidden" name="diameterUnits" value="2.54">
+						<br>
+						<!--
+						<select name="diameterUnits" onchange="getOption( this.form )">
+							<option value="2.54" selected="selected">in</option>
+							<option value="30.48">ft</option>
+							<option value=".1">mm</option>
+							<option value="1">cm</option>
+							<option value="100">m</option>
+						</select><br>-->
+					</div>
+
+					<div class="row">
+						<b>Pipe Length</b><br>
+						<input type="text" name="length" style='width:80%;' placeholder='Pipe Length' value="0.0" onchange="getOption( this.form )">
+						<select name="lengthUnits" onchange="getOption( this.form )">
+							<option value="1" selected="selected">ft</option>
+							<option value="0.08333333333">in</option>
+							<option value="3.28083989501">m</option>
+						</select>
+					</div>
+					<div class="row">
+						<b>Piping Type (ASTM B88)</b><br>
+						<!-- <input type="text" style='display: none;' readonly class='label'>&nbsp; -->
+						<select id="xxx" style='width:80%;' name="xxx" onchange="getOption( this.form )">
+							<option value="col-k">K</option>
+							<option value="col-l">L</option>
+							<option value="col-m">M</option>
+							<option value="col-d">DVW</option>
+						</select>
+					</div>
+
+					<div class="row">
+						<input type="hidden" name="material" value="150">
+						<!--select name="material" onchange="getOption( this.form )">
+							<option value="150">Copper</option>
+							<option value="150">Plastic</option>
+							<option value="145">Epoxy coated steel</option>
+							<option value="140">Cement asbestos</option>
+							<option value="135">Galvanized steel</option>
+							<option value="130">New steel</option>
+							<option value="120">Aluminum with couplers</option>
+							<option value="100">15 year old steel</option>
+						</select-->
+					</div>
+
+					<div class="row" >
+						<input id="calculate" style='width:80%;' type="button" value="Calculate" onclick="getOption( this.form )">
+					</div>
+				</section>
+
+				<section id="section-calculate">
+					<div class="row">
+						<b>Pressure Loss</b><br>
+						<input type="text" name="pressureLoss" style='width:50%;' placeholder='Pressure Loss results'>
+						<select name="pressureLossUnits" onchange="getOption( this.form )">
+							<option value="1" selected="selected">psi</option>
+							<option value="6.8947625">kPa</option>
+							<option value="2.306661407">feet of water</option>
+							<option value="0.068947573">bar</option>
+							<option value=".70309">m of water</option>
+						</select>
+					</div>
+					<div class="row">
+						<b>Velocity FPS"</b><br>
+						<input type="text" name="waterVelocity" style='width:80%;'  placeholder='Velocity FPS&quot; results'> <b>fps</b>
+						<input type="hidden" name="velocityFPSUnits" value="1"> <br>
+						<b>Inner Diameter</b><br>
+						<input type="text" name="innerDiameter" style='width:80%;' placeholder="0.250 - 10" onchange="getOption( this.form )"> <b>in</b><br>
+						<b>Outer Diameter</b><br>
+						<input type="text" name="outerDiameter" style='width:80%;' placeholder="0.250 - 10" onchange="getOption( this.form )"> <b>in</b><br>
+						<b>Wall Thickness</b><br>
+						<input type="text" name="wallThickness" style='width:80%;' placeholder="0.250 - 10" onchange="getOption( this.form )"> <b>in</b>
+						
+					</div>
+				</section>
+
+						<script>
+						//Developed length C=140 or C=150
+
+						// 0 = Nominal Pipe Size Inches
+						// 1 = Outer Diameter
+
+						// Inner Diameter
+						// 2 = K
+						// 3 = L
+						// 4 = M
+						// 5 = DWV
+
+						// Wall Thickness
+						// 6 = K
+						// 7 = L
+						// 8 = M
+						// 9 = DWV
+
+						let copperpiping = [
+							['0.250', '0.375', [
+									['0.305','0.035',],
+									['0.315','0.030',],
+									[			'',			'',],
+									[			'',			'',],
+								]
+							],
+							['0.375', '0.500', [
+									['0.402','0.049'],
+									['0.430','0.035'],
+									['0.450','0.025'],
+									[			'',			''],
+								]
+							],
+							['0.500', '0.625', [
+									['0.527','0.049'],
+									['0.545','0.040'],
+									['0.569','0.026'],
+									[			'',			''],
+								]
+							],
+							['0.625', '0.750', [
+									['0.652','0.049'],
+									['0.666','0.042'],
+									[			'',			''],
+									[			'',			''],
+								]
+							],
+							['0.750', '0.875', [
+									['0.745','0.065'],
+									['0.785','0.450'],
+									['0.811','0.032'],
+									[		 '',''],
+							]
+							],
+							['1.000', '1.125', [
+									['0.995','0.065'],
+									['1.025','0.050'],
+									['1.055','0.035'],
+									[			'',			''],
+								]
+							],
+							['1.250', '1.375', [
+									['1.245','0.065'],
+									['1.265','0.055'],
+									['1.291','0.042'],
+									['1.295','0.040'],
+								]
+							],
+							['1.500', '1.625', [
+									['1.481','0.072'],
+									['1.505','0.060'],
+									['1.527','0.049'],
+									['1.541','0.042'],
+								]
+							],
+							['2.000', '2.125', [
+									['1.959','0.083'],
+									['1.985','0.070'],
+									['2.009','0.058'],
+									['2.041','0.042'],
+								]
+							],
+							['2.500', '2.625', [
+									['2.435','0.095'],
+									['2.465','0.080'],
+									['2.495','0.065'],
+									[ 		'',			''],
+								]
+							],
+							['3.000', '3.125', [
+									['2.907','0.109'],
+									['2.945','0.090'],
+									['2.981','0.072'],
+									['3.030','0.045'],
+								]
+							],
+							['3.500', '3.625', [
+									['3.385','0.120'],
+									['3.425','0.100'],
+									['3.459','0.830'],
+									[			'',			''],
+								]
+							],
+							['4.000', '4.125', [
+									['3.857','0.134'],
+									['3.897','0.114'],
+									['3.935','0.095'],
+									['4.009','0.058'],
+								]
+							],
+							['5.000', '5.125', [
+									['4.805','0.160'],
+									['4.875','0.125'],
+									['4.907','0.109'],
+									['4.981','0.072'],
+								]
+							],
+							['6.000', '6.125', [
+									['5.741','0.192'],
+									['5.845','0.140'],
+									['5.881','0.122'],
+									['5.959','0.083'],
+								]
+							],
+							['8.000','8.125', [
+									['7.583','0.271'],
+									['7.725','0.200'],
+									['7.785','0.170'],
+									[			'',			''],
+								]
+							],
+							['10.000', 		'', [
+									[			'',			''],
+									[			'',			''],
+									[			'',			''],
+									[			'',			''],
+								]
+							],
+						];
+
+						function getOption(form) {
+							diameterIndex = document.querySelector('#diameter');
+							typeIndex = document.querySelector('#xxx');
+
+							let pipeValues = copperpiping[1,[diameterIndex.selectedIndex]];
+							nomTubeSize = pipeValues[0];
+
+							outerDiameter = pipeValues[1];
+							console.log('outerDiameter:'+outerDiameter);
+
+							let pipeTypeValues = pipeValues[0,2][typeIndex.selectedIndex];
+
+							innerDiameter = pipeTypeValues[0];
+							console.log('innerDiameter:'+innerDiameter);
+
+							wallThickness = pipeTypeValues[1];
+							console.log('wallThickness:'+wallThickness);
+
+							form.wallThickness.value = wallThickness;
+							form.outerDiameter.value = outerDiameter;
+							form.innerDiameter.value = innerDiameter;
+							form.flowRate.value = form.flow.value;
+
+							calc_pipefriction( form );
+							calc_waterVelocity( form );
+						}
+						</script>
+				</form>		
+			
+				</div>
+
+					<!-- <div class="one-half column">
+						<div class="notice">
+							<div style='float:left;margin-right: 10px;'><b>NOTICE: </b></div>
+							<p style='display:contents; overflow-wrap: break-word;'>
+								This copper tube sizing instruction booklet and calculator have been prepared for the use of journeymen, 
+								plumbing and heating contractors, engineers, and others involved in the design or installation of fire-sprinkler,
+								plumbing, or solar heating systems. They have been compiled from information sources that the Copper Development
+								Association Inc. believes to be competent. However, recognizing that each system must be designed and installed
+								to meet particular circumstances, CDA assumes no responsibility or liability of any kind in connection with this
+								booklet and calculator or their use by any person or organization and makes no representations or warranties of any
+								kind thereby.
+							</p>
+						</div>
+					</div> -->
+					
+				</div>		
+
+			<section id="section-3"  style="padding-bottom: 5rem;">
+				<div class='row' >
+					<!-- Tab links -->
+					<div class="tab">
+						<button class="tablinks" onclick="openTab(event, 'K')">K</button>
+						<button class="tablinks" onclick="openTab(event, 'L')">L</button>
+						<button class="tablinks" onclick="openTab(event, 'M')">M</button>
+					</div>
+
+						<!-- Tab content -->
+					<section id="table-container">
+						<div id="K" class="tabcontent active" style='border:none;padding:0;display: block;'>
+							<iframe id="scaled-frame-k" class="scaled-frame" src="k.html" style='border:none;height:450px;'></iframe>
+						</div>
+
+						<div id="L" class="tabcontent" style='border:none;padding:0;'>
+							<iframe id="scaled-frame-l" class="scaled-frame" src="l.html" style='border:none;height:450px;'></iframe>
+						</div>
+
+						<div id="M" class="tabcontent" style='border:none;padding:0;'>
+							<iframe id="scaled-frame-m" class="scaled-frame" src="m.html" style='border:none;height:450px;'></iframe>
+						</div>
+
+						<div id="D" class="tabcontent">
+							<iframe class="scaled-frame" style='border: none;height:450px;'></iframe>
+						</div>
+						<div id="V" class="tabcontent">
+							<iframe class="scaled-frame"  style='border: none;height:450px;'></iframe>
+						</div>
+						<div id="W" class="tabcontent">
+							<iframe class="scaled-frame"  style='border: none;height:450px;'></iframe>
+						</div>
+					</section>
+				
+				</div>		
+			</section>
+
+			<section id="section-4" class="section"> 
+
+				<div class='row'>
+					<div class="parent" style="display: flex; justify-content: center; align-items: center; ">
+						<iframe id="toc-frame" src="assets/copper_tube_handbook.pdf-R.pdf"></iframe>
+					</div>
+				</div>
+			</section>	
+
+      </div>
+    </div>
+  </div>
+  
+	<!-- End Document -->
+	<script type="text/javascript" src="js/tabs.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript">
+
+		function scrollToSectionCenter() {
+			const sectionCalculate = document.getElementById('section-calculate');
+			
+			if (sectionCalculate) {
+				const sectionRect = sectionCalculate.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+				const scrollToY = sectionRect.top + window.scrollY + (sectionRect.height / 2) - (windowHeight / 2);
+				
+				window.scrollTo({
+					top: scrollToY,
+					behavior: 'smooth'
+				});
+			}
+		}
+		
+		document.addEventListener('DOMContentLoaded', function () {
+			const calculateButton = document.getElementById('calculate');
+
+			calculateButton.addEventListener('click', function () {
+				scrollToSectionCenter();
+			});
+		});
+
+		const calculateButton = document.getElementById('calculate');
+
+		calculateButton.addEventListener('click', () => {
+		// Agrega la clase "highlight" a los inputs excepto "pressureLoss"
+		const inputsToHighlight = document.querySelectorAll('#section-calculate input');
+		inputsToHighlight.forEach(input => {
+			input.classList.add('highlight');
+		});
+
+		// Elimina la clase "highlight" después de un tiempo (por ejemplo, 2 segundos)
+		setTimeout(() => {
+			inputsToHighlight.forEach(input => {
+			input.classList.remove('highlight');
+			});
+		}, 1000); // 2000 milisegundos (2 segundos)
+		});
+	</script> 
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* Estilos generales de la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  scroll-padding-top: none ;
+  scroll-padding-bottom: none;
+}
+
+/* Estilos para encabezado de tabla */
+thead {
+  background-color: #395870;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin-top: 0;
+}
+
+thead th {
+  border-bottom: none;
+  text-align: center;
+  font-size: 17px;
+  padding:8px;
+}
+
+/* Estilos para las celdas */
+th,
+td {
+  padding: 7px;
+  padding-top: none ;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+thead tr th{
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+/* Estilos para filas pares */
+tbody tr:nth-child(even) {
+  background-color: #f0f0f2;
+  
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 938px) {
+  table {
+    font-size: 16px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  tbody tr td {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    padding: 3px;
+    min-width: 80px;
+    white-space: nowrap;
+  }
+
+  .flow-grid-header:first-child {
+    position: sticky;
+    left: 0;
+    text-align: center;
+    color: white;
+    border: none;
+    background-color: #395870;
+    margin-left: 0; 
+    width: fit-content;
+    min-width: 80px;
+  }
+
+  .flow-grid-cell:first-child {
+    position: sticky;
+    left: 0;
+    text-align: center;
+    color: white;
+    border: none;
+    background-color: #395870;
+    margin-left: 0; 
+    width: fit-content;
+    min-width: 80px;
+  }
+
+  td {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+}
+

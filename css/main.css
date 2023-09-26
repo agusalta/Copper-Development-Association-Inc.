@@ -1,0 +1,190 @@
+body {
+  background-color: #fff;
+}
+
+h4 {
+  color: #998866;
+  border-bottom: 2px solid #998866;
+  text-align: left;
+}
+
+hr {
+  color: #998866;
+  border: 1px solid #998866;
+}
+
+.label {
+  color: #998866;
+  font-weight: bolder;
+  background-color: lightgray;
+}
+
+input[type='button'] {
+  color: #fff;
+  background-color: #004153;
+  border: #fff;
+  font-weight: bolder;
+}
+
+#logo {
+  margin-top: 3px;
+  display: block;
+  max-width: 100%;
+  max-height: 72px;
+}
+
+.steps,
+.steps B {
+  font-size: 1.5rem;
+  color: #986;
+  font-weight: bold;
+  font-family: 'Literata';
+}
+
+.col-k,
+.col-l,
+.col-m {
+  width: auto;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.notice {
+  font-size: 1.5rem;
+  text-align:justify;
+  border-top: rgb(38, 35, 30);
+  color: #986;
+  font-family: 'Literata';
+}
+
+#calculate{
+  background-color: #004153;
+  color: white;
+}
+
+
+#calculate:hover {
+  color: white;
+  transition: ease-in-out .5s;
+  background-color: #986;
+}
+
+#calculate:active {
+  color: white;
+  background-color: #986;
+  transition: background-color 0.3s ease-in-out;
+  transform: translateY(2px); 
+}
+
+.navegation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+a:visited {
+  color: #986; 
+}
+
+.highlight {
+  transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease !important; 
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) !important; 
+  transform: scale(1) !important; 
+}
+
+.scaled-frame {
+  width:100%;
+  height: 1000px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.default-Background {
+  font-family: 'Helvetica';
+  background-color: #ffffff;
+  color: #986 ;
+  border: none;
+  border-bottom: 1px solid #986;
+  border-radius: 0;
+  width: 100%; 
+  margin-bottom: 0; /* Elimina el margen inferior para que esté pegado al iframe */
+}
+
+.pdf-Background {
+  font-family: 'Helvetica';
+  background-color: #323639;
+  color: white;
+  border-radius: 0;
+  width: 100%; 
+  margin-bottom: 0;
+}
+
+#pressure-Loss-Calculate{
+  background-color: #004153;
+  color: white;
+}
+
+#pressure-Loss-Calculate:hover{
+  color: white;
+  transition: ease-in-out .5s;
+  background-color: #986;
+}
+
+#pressure-Loss-Calculate:active{
+  color: white;
+  background-color: #986;
+  transition: background-color 0.3s ease-in-out;
+  transform: translateY(2px); 
+}
+
+#pdf-content-frame {
+  border: none;
+  min-width: 40%;
+  min-height: 800px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+#toc-frame {
+  border: none;
+  min-width: 100%;
+  min-height: 800px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+ /* iframe styles */
+.parent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 3px;
+  grid-row-gap: 0px;
+}
+
+@media (max-width: 768px) {
+  .parent {
+    grid-template-columns: 1fr !important; 
+    grid-row-gap: 10px !important; 
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #toc-frame, #pdf-content-frame {
+    width: 100%; 
+  }
+
+  .scrollable-iframe {
+    max-width: 100%; 
+    max-height: 600px; 
+    overflow-y: scroll;
+  }
+
+}
