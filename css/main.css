@@ -157,3 +157,15 @@ a:visited {
 }
 
 
+#calculator-inputs {
+  background-color: lightgrey;
+  padding-left: 2rem;
+}
+
+#btn-section {
+  padding-top: 1rem;
+}
+
+#section-calculate, #btn-section {
+  padding-left: 2rem;
+}

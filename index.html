@@ -61,6 +61,11 @@
 	<div class="one-half column">
 				<form action="" class="form">
 				<section id="section-2" class="section">
+				<section id="calculator-inputs">
+					<legend style="padding-bottom: 1rem;">
+						<strong>Provide the following criteria:</strong> 
+					</legend>
+
 					<div class="row">
 						<b>Flow Rate (GPM)</b><br>
 						<input type="text" style='width:80%;' name="flow" placeholder='Flow Rate (-0.1 - 5.0+)' value="0.0" onchange="getOption(this.form)">
@@ -132,6 +137,8 @@
 							<!-- <option value="col-d">DVW</option> -->
 						</select>
 					</div>
+				</section>
+				
 
 					<div class="row">
 						<input type="hidden" name="material" value="150">
@@ -147,9 +154,10 @@
 						</select-->
 					</div>
 
-					<div class="row" >
+					<div id="btn-section">
 						<input id="calculate" style='width:80%;' type="button" value="Calculate" onclick="getOption( this.form )">
 					</div>
+				
 				</section>
 
 				<section id="section-calculate">
