@@ -20,23 +20,23 @@
 	<table id='flow-grid' style='width:100%;padding:0;margin:0;'>
   <thead>
 	  <tr>
-			<th class="flow-grid-header col-k">Flow GPM</th>
-      <th class="flow-grid-header col-k d1o4">1/4&quot;</th>
-			<th class="flow-grid-header col-k d3o8">3/8&quot;</th>
-      <th class="flow-grid-header col-k d1o2">1/2&quot;</th>
-			<th class="flow-grid-header col-k d3o4">3/4&quot;</th>
-      <th class="flow-grid-header col-k d1">1&quot;</th>
-			<th class="flow-grid-header col-k d1a1o4">1-1/4&quot;</th>
-			<th class="flow-grid-header col-k d1a1o2">1-1/2&quot;</th>
-			<th class="flow-grid-header col-k d2">2&quot;</th>
-      <th class="flow-grid-header col-k d3o4">2-1/2&quot;</th>
-      <th class="flow-grid-header col-k d1">3&quot;</th>
-			<th class="flow-grid-header col-k d1a1o4">4&quot;</th>
-			<th class="flow-grid-header col-k d1a1o2">5&quot;</th>
-			<th class="flow-grid-header col-k d2">6&quot;</th>
-      <th class="flow-grid-header col-k d2">8&quot;</th>
-      <th class="flow-grid-header col-k d2">10&quot;</th>
-      <th class="flow-grid-header col-k d2">12&quot;</th>
+			<th id="flowGPM" class="flow-grid-header col-k">Flow GPM</th>
+      <th class="flow-grid-header col-k d1o4">1/4</th>
+			<th class="flow-grid-header col-k d3o8">3/8</th>
+      <th class="flow-grid-header col-k d1o2">1/2</th>
+			<th class="flow-grid-header col-k d3o4">3/4</th>
+      <th class="flow-grid-header col-k d1">1</th>
+			<th class="flow-grid-header col-k d1a1o4">1-1/4</th>
+			<th class="flow-grid-header col-k d1a1o2">1-1/2</th>
+			<th class="flow-grid-header col-k d2">2</th>
+      <th class="flow-grid-header col-k d3o4">2-1/2</th>
+      <th class="flow-grid-header col-k d1">3</th>
+			<th class="flow-grid-header col-k d1a1o4">4</th>
+			<th class="flow-grid-header col-k d1a1o2">5</th>
+			<th class="flow-grid-header col-k d2">6</th>
+      <th class="flow-grid-header col-k d2">8</th>
+      <th class="flow-grid-header col-k d2">10</th>
+      <th class="flow-grid-header col-k d2">12</th>
     </tr>
   </thead>
   <tbody>
@@ -747,7 +747,102 @@
     </tr>
   </tbody>
 </table>
-  </div>
+</div>
+
+<script type="text/javascript" src="js/tabs.js"></script>
+<script type="text/javascript">
+
+  window.addEventListener('message', function (event) { 
+    const data = event.data;
+    const tubeSize = data.tubeSize;
+    const flowRate = data.flowRate;
+
+    console.log('Tube Size:', tubeSize);
+    console.log('Flow Rate:', flowRate);
+    console.log("esto es K");
+
+    console.log(getTubeSizePos(tubeSize));
+    console.log(getFlowRateCell(flowRate));
+
+    highlightCell(flowRate, tubeSize);
+  });
+
+  // Table variables
+  const table = document.getElementById('flow-grid');
+  const tableBody = table.querySelector('tbody');
+  //
+
+   function getTubeSizePos(tubeSize) {
+    const tableRow = table.querySelector('thead tr');
+    const tableHeaders = tableRow.querySelectorAll('th');
+    const tableHeadersArray = Array.from(tableHeaders);
+    let pos = 1;
+    let sameTubeSize = false;
+
+    while(pos < tableHeadersArray.length && sameTubeSize === false) {
+      if(tableHeaders[pos].textContent === tubeSize) {
+        sameTubeSize = true;
+      } else {
+        console.log(tableHeaders[pos].textContent);
+        pos++;
+      }
+    }
+
+    console.log(tubeSize)
+    return pos;
+  }
+
+  function getFlowRate() {
+    const tableRow = tableBody.querySelectorAll('tr');
+    const firstTd = [];
+
+    tableRow.forEach(row => {
+      const firstCell = row.querySelector('td:first-child').textContent;
+      firstTd.push(firstCell);
+    });
+    
+    console.log(firstTd);
+    return firstTd;
+  }
+
+  function getFlowRateCell(flowRate) {
+    if(flowRate !== 0) {
+      const tdArray = getFlowRate();
+      let pos = 0;
+      let sameFlowRate = false;
+
+      while(pos < tdArray.length && sameFlowRate === false) {
+        if(tdArray[pos] == flowRate) {
+          sameFlowRate = true;
+        } else {
+          pos++;
+        }
+      }
+      return pos;
+    }
+  }
+
+  function highlightCell(flowRate, tubeSize ) {
+    const rows = tableBody.querySelectorAll('tr');
+    const rowPos = getFlowRateCell(flowRate);
+    const colPos = getTubeSizePos(tubeSize);
+
+    // reset previous searchs
+    rows.forEach(row => {
+    const cells = row.querySelectorAll('td');
+      cells.forEach(cell => {
+        cell.style.backgroundColor = ''; 
+        cell.style.fontWeight = '';
+      });
+    });
+
+    const targetRow = rows[rowPos];
+    const targetCell = targetRow.querySelectorAll('td')[colPos];
+    targetCell.style.backgroundColor = 'yellow';
+    targetCell.style.fontWeight = 'bold';
+
+  }
+</script>
 
 </body>
 </html>

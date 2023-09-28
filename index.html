@@ -348,24 +348,7 @@
 				</form>		
 			
 				</div>
-
-					<!-- <div class="one-half column">
-						<div class="notice">
-							<div style='float:left;margin-right: 10px;'><b>NOTICE: </b></div>
-							<p style='display:contents; overflow-wrap: break-word;'>
-								This copper tube sizing instruction booklet and calculator have been prepared for the use of journeymen, 
-								plumbing and heating contractors, engineers, and others involved in the design or installation of fire-sprinkler,
-								plumbing, or solar heating systems. They have been compiled from information sources that the Copper Development
-								Association Inc. believes to be competent. However, recognizing that each system must be designed and installed
-								to meet particular circumstances, CDA assumes no responsibility or liability of any kind in connection with this
-								booklet and calculator or their use by any person or organization and makes no representations or warranties of any
-								kind thereby.
-							</p>
-						</div>
-					</div> -->
-					
 				</div>		
-
 			<section id="section-3"  style="padding-bottom: 5rem;">
 				<div class='row' >
 					<!-- Tab links -->
@@ -415,50 +398,78 @@
   </div>
   
 	<!-- End Document -->
-	<script type="text/javascript" src="js/tabs.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript" src="js/tabs.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript">
+	const calculateButton = document.getElementById('calculate');
 
-		function scrollToSectionCenter() {
-			const sectionCalculate = document.getElementById('section-calculate');
-			
-			if (sectionCalculate) {
-				const sectionRect = sectionCalculate.getBoundingClientRect();
-				const windowHeight = window.innerHeight;
-				const scrollToY = sectionRect.top + window.scrollY + (sectionRect.height / 2) - (windowHeight / 2);
-				
-				window.scrollTo({
-					top: scrollToY,
-					behavior: 'smooth'
-				});
-			}
-		}
+	function scrollToSectionCenter() {
+		const sectionCalculate = document.getElementById('section-calculate');
 		
-		document.addEventListener('DOMContentLoaded', function () {
-			const calculateButton = document.getElementById('calculate');
+		if (sectionCalculate) {
+			const sectionRect = sectionCalculate.getBoundingClientRect();
+			const windowHeight = window.innerHeight;
+			const scrollToY = sectionRect.top + window.scrollY + (sectionRect.height / 2) - (windowHeight / 2);
+			
+			window.scrollTo({
+				top: scrollToY,
+				behavior: 'smooth'
+			});
+		}
+	}
+	
+	// Table Highlight
+	
+	function highlightTableCell(event) {
+		// flog GPM input value
+		const flowRate = parseFloat(document.querySelector('input[name="flow"]').value);
+	
+		const tubeSizeSelect = document.querySelector('select[name="diameter"]');
+		// tube size input value
+		let tubeSize = tubeSizeSelect.options[tubeSizeSelect.selectedIndex].text;
+	
+		const pipingTypeSelect = document.querySelector('select[name="xxx"]');
+		// piping type input value
+		let pipingType = pipingTypeSelect.options[pipingTypeSelect.selectedIndex].text;
+		
+		// open table view
+		if(pipingType == 'K') {
+			openTab(event, 'K');
+			const tableK = document.getElementById('scaled-frame-k');
+			tableK.contentWindow.postMessage({flowRate, tubeSize}, '*');
+		} else if (pipingType == 'L') {
+			openTab(event, 'L');
+			const tableL = document.getElementById('scaled-frame-l');
+			tableL.contentWindow.postMessage({flowRate, tubeSize}, '*');
+		} else {
+			openTab(event, 'M');
+			const tableM = document.getElementById('scaled-frame-m');
+			tableM.contentWindow.postMessage({flowRate, tubeSize}, '*');
+		}
+	
+		console.log(flowRate, tubeSize, pipingType)
+	}
 
+	// Button events
+	calculateButton.addEventListener("click", highlightTableCell);
+	calculateButton.addEventListener('click', () => {
+			const inputsToHighlight = document.querySelectorAll('#section-calculate input');
+			inputsToHighlight.forEach(input => {
+				input.classList.add('highlight');
+			});
+			
+			setTimeout(() => {
+				inputsToHighlight.forEach(input => {
+				input.classList.remove('highlight');
+				});
+			}, 1000); 
+	});
+	document.addEventListener('DOMContentLoaded', function () {
 			calculateButton.addEventListener('click', function () {
 				scrollToSectionCenter();
 			});
-		});
+	});
 
-		const calculateButton = document.getElementById('calculate');
-
-		calculateButton.addEventListener('click', () => {
-		// Agrega la clase "highlight" a los inputs excepto "pressureLoss"
-		const inputsToHighlight = document.querySelectorAll('#section-calculate input');
-		inputsToHighlight.forEach(input => {
-			input.classList.add('highlight');
-		});
-
-		// Elimina la clase "highlight" después de un tiempo (por ejemplo, 2 segundos)
-		setTimeout(() => {
-			inputsToHighlight.forEach(input => {
-			input.classList.remove('highlight');
-			});
-		}, 1000); // 2000 milisegundos (2 segundos)
-		});
-		
-	</script> 
+</script> 
 </body>
 </html>
