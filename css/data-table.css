@@ -92,3 +92,9 @@ tbody tr:nth-child(even) {
   }
 }
 
+.highlighted-cell {
+  background-color: yellow;
+  font-weight: bold;
+  border: 2px solid orange; 
+  color: black; 
+}

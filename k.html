@@ -759,7 +759,7 @@
 
     console.log('Tube Size:', tubeSize);
     console.log('Flow Rate:', flowRate);
-    console.log("esto es K");
+    console.log("K");
 
     console.log(getTubeSizePos(tubeSize));
     console.log(getFlowRateCell(flowRate));
@@ -823,25 +823,28 @@
   }
 
   function highlightCell(flowRate, tubeSize ) {
-    const rows = tableBody.querySelectorAll('tr');
-    const rowPos = getFlowRateCell(flowRate);
-    const colPos = getTubeSizePos(tubeSize);
-
-    // reset previous searchs
-    rows.forEach(row => {
-    const cells = row.querySelectorAll('td');
-      cells.forEach(cell => {
-        cell.style.backgroundColor = ''; 
-        cell.style.fontWeight = '';
+      const rows = tableBody.querySelectorAll('tr');
+      const rowPos = getFlowRateCell(flowRate);
+      const colPos = getTubeSizePos(tubeSize);
+  
+      // reset previous searchs
+      rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+        cells.forEach(cell => {
+          // cell.style.backgroundColor = ''; 
+          // cell.style.fontWeight = '';
+          cell.classList.remove('highlighted-cell');
+        });
       });
-    });
+  
+      const targetRow = rows[rowPos];
+      const targetCell = targetRow.querySelectorAll('td')[colPos];
 
-    const targetRow = rows[rowPos];
-    const targetCell = targetRow.querySelectorAll('td')[colPos];
-    targetCell.style.backgroundColor = 'yellow';
-    targetCell.style.fontWeight = 'bold';
-
-  }
+      // targetCell.style.backgroundColor = 'yellow';
+      // targetCell.style.fontWeight = 'bold';
+  
+      targetCell.classList.add('highlighted-cell');
+    }
 </script>
 
 </body>
