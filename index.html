@@ -62,7 +62,7 @@
 				<form action="" class="form">
 				<section id="section-2" class="section">
 				<section id="calculator-inputs">
-					<legend style="padding-bottom: 1rem;">
+					<legend style="padding: 1rem 0 1rem 0;">
 						<strong>Provide the following criteria:</strong> 
 					</legend>
 
@@ -153,13 +153,15 @@
 							<option value="100">15 year old steel</option>
 						</select-->
 					</div>
-
+					
 					<div id="btn-section">
 						<input id="calculate" style='width:80%;' type="button" value="Calculate" onclick="getOption( this.form )">
 					</div>
-				
+					
 				</section>
-
+				
+			
+			
 				<section id="section-calculate">
 					<div class="row">
 						<b>Pressure Loss</b><br>
@@ -417,7 +419,7 @@
 		if (sectionCalculate) {
 			const sectionRect = sectionCalculate.getBoundingClientRect();
 			const windowHeight = window.innerHeight;
-			const scrollToY = sectionRect.top + window.scrollY + (sectionRect.height / 2) - (windowHeight / 2);
+			const scrollToY = sectionRect.top + window.scrollY + (sectionRect.height / 2) - (windowHeight / 3);
 			
 			window.scrollTo({
 				top: scrollToY,
@@ -445,6 +447,7 @@
 			openTab(event, 'K');
 			const tableK = document.getElementById('scaled-frame-k');
 			tableK.contentWindow.postMessage({flowRate, tubeSize}, '*');
+
 		} else if (pipingType == 'L') {
 			openTab(event, 'L');
 			const tableL = document.getElementById('scaled-frame-l');

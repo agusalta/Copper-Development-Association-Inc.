@@ -158,7 +158,8 @@ a:visited {
 
 
 #calculator-inputs {
-  background-color: lightgrey;
+  background-color: lightgray;
+  border-radius: 3px;
   padding-left: 2rem;
 }
 
@@ -168,5 +169,7 @@ a:visited {
 
 #section-calculate, #btn-section {
   padding-left: 2rem;
+  background-color: whitesmoke;
+  border-radius: 3px;
 }
 
