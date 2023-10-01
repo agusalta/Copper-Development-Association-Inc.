@@ -1,5 +1,4 @@
 function openTab(evt, tabName) {
-  
   var i, tabcontent, tablinks;
 
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -16,3 +15,17 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
+function clearTableStyles(tableId) {
+  const table = document.getElementById(tableId);
+
+  if (table) {
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      cells.forEach(cell => {
+        cell.style.backgroundColor = '';
+        cell.style.fontWeight = '';
+      });
+    });
+  }
+}

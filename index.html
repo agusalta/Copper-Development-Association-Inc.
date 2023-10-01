@@ -371,15 +371,15 @@
 						<!-- Tab content -->
 					<section id="table-container">
 						<div id="K" class="tabcontent active" style='border:none;padding:0;display: block;'>
-							<iframe id="scaled-frame-k" class="scaled-frame" src="k.html" style='border:none;height:450px;'></iframe>
+							<iframe id="scaled-frame-K" class="scaled-frame" src="k.html" style='border:none;height:450px;'></iframe>
 						</div>
 
 						<div id="L" class="tabcontent" style='border:none;padding:0;'>
-							<iframe id="scaled-frame-l" class="scaled-frame" src="l.html" style='border:none;height:450px;'></iframe>
+							<iframe id="scaled-frame-L" class="scaled-frame" src="l.html" style='border:none;height:450px;'></iframe>
 						</div>
 
 						<div id="M" class="tabcontent" style='border:none;padding:0;'>
-							<iframe id="scaled-frame-m" class="scaled-frame" src="m.html" style='border:none;height:450px;'></iframe>
+							<iframe id="scaled-frame-M" class="scaled-frame" src="m.html" style='border:none;height:450px;'></iframe>
 						</div>
 
 						<div id="D" class="tabcontent">
@@ -442,23 +442,25 @@
 		// piping type input value
 		let pipingType = pipingTypeSelect.options[pipingTypeSelect.selectedIndex].text;
 		
-		// open table view
-		if(pipingType == 'K') {
-			openTab(event, 'K');
-			const tableK = document.getElementById('scaled-frame-k');
-			tableK.contentWindow.postMessage({flowRate, tubeSize}, '*');
-		} else if (pipingType == 'L') {
-			openTab(event, 'L');
-			const tableL = document.getElementById('scaled-frame-l');
-			tableL.contentWindow.postMessage({flowRate, tubeSize}, '*');
-		} else {
-			openTab(event, 'M');
-			const tableM = document.getElementById('scaled-frame-m');
-			tableM.contentWindow.postMessage({flowRate, tubeSize}, '*');
+		const tables = ['K', 'L', 'M'];
+
+		function sendMessageAndClearStyles(tabName) {
+			openTab(event, tabName);
+			const iframe = document.getElementById(`scaled-frame-${tabName}`);
+			iframe.contentWindow.postMessage({ flowRate, tubeSize }, '*');
 		}
-	
-		console.log(flowRate, tubeSize, pipingType)
-	}
+
+		tables.forEach((table) => {
+        if (table === pipingType) { 
+            sendMessageAndClearStyles(table);
+        } else {
+            const iframe = document.getElementById(`scaled-frame-${table}`);
+            iframe.contentWindow.postMessage({ clearStyles: true }, '*');
+        }
+    });
+		
+			console.log(flowRate, tubeSize, pipingType)
+		}
 
 	// Button events
 	calculateButton.addEventListener("click", highlightTableCell);
