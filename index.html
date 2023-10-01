@@ -363,9 +363,9 @@
 				<div class='row' >
 					<!-- Tab links -->
 					<div class="tab">
-						<button class="tablinks" onclick="openTab(event, 'K')">K</button>
-						<button class="tablinks" onclick="openTab(event, 'L')">L</button>
-						<button class="tablinks" onclick="openTab(event, 'M')">M</button>
+						<button id="btn-K" class="tab-button" onclick="openTab(event, 'K')">K</button>
+						<button id="btn-L" class="tab-button" onclick="openTab(event, 'L')">L</button>
+						<button id="btn-M" class="tab-button" onclick="openTab(event, 'M')">M</button>
 					</div>
 
 						<!-- Tab content -->
@@ -408,11 +408,12 @@
   </div>
   
 	<!-- End Document -->
-<script type="text/javascript" src="js/tabs.js"></script>
 <script type="text/javascript" src="js/scripts.js"></script>
 <script type="text/javascript">
 	const calculateButton = document.getElementById('calculate');
+	const pipingTypeSelect = document.querySelector('select[name="xxx"]');
 
+	// Define a function to scroll to the center of a specific section on the page
 	function scrollToSectionCenter() {
 		const sectionCalculate = document.getElementById('section-calculate');
 		
@@ -429,7 +430,8 @@
 	}
 	
 	// Table Highlight
-	
+
+	// Define a function to highlight cells in tables
 	function highlightTableCell(event) {
 		// flog GPM input value
 		const flowRate = parseFloat(document.querySelector('input[name="flow"]').value);
@@ -437,51 +439,99 @@
 		const tubeSizeSelect = document.querySelector('select[name="diameter"]');
 		// tube size input value
 		let tubeSize = tubeSizeSelect.options[tubeSizeSelect.selectedIndex].text;
-	
-		const pipingTypeSelect = document.querySelector('select[name="xxx"]');
-		// piping type input value
-		let pipingType = pipingTypeSelect.options[pipingTypeSelect.selectedIndex].text;
-		
+
 		const tables = ['K', 'L', 'M'];
 
-		function sendMessageAndClearStyles(tabName) {
-			openTab(event, tabName);
-			const iframe = document.getElementById(`scaled-frame-${tabName}`);
-			iframe.contentWindow.postMessage({ flowRate, tubeSize }, '*');
+		tables.forEach((table) => {
+			if (table === pipingType) { 
+				openTab(event, table)
+				const iframe = document.getElementById(`scaled-frame-${table}`);
+				iframe.contentWindow.postMessage({ flowRate, tubeSize }, '*');
+			} else {
+				const iframe = document.getElementById(`scaled-frame-${table}`);
+				iframe.contentWindow.postMessage({ clearStyles: true }, '*');
+			}
+    	});
+		
+		console.log(flowRate, tubeSize, pipingType)
+	}
+
+	// Define a function to change the selected table based on user input
+	let currentTab = 'K';
+
+	function changeTable(event) {
+		pipingType = pipingTypeSelect.options[pipingTypeSelect.selectedIndex].text;
+
+		const buttons = document.querySelectorAll('.tab-button');
+
+		buttons.forEach(button => {
+			button.classList.remove('active');
+		});
+
+		if (pipingType === 'K') {
+			currentTab = 'K'; // Actualiza la pestaña actual
+			const botonK = document.getElementById('btn-K');
+			botonK.classList.add('active');
+			openTab(event, 'K');
+		} else if (pipingType === 'L') {
+			currentTab = 'L'; // Actualiza la pestaña actual
+			const botonL = document.getElementById('btn-L');
+			botonL.classList.add('active');
+			openTab(event, 'L');
+		} else {
+			currentTab = 'M'; // Actualiza la pestaña actual
+			const botonM = document.getElementById('btn-M');
+			botonM.classList.add('active');
+			openTab(event, 'M');
+		}
+	}
+
+	function openTab(evt, tabName) {
+		var i, tabcontent, tablinks;
+
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
 		}
 
-		tables.forEach((table) => {
-        if (table === pipingType) { 
-            sendMessageAndClearStyles(table);
-        } else {
-            const iframe = document.getElementById(`scaled-frame-${table}`);
-            iframe.contentWindow.postMessage({ clearStyles: true }, '*');
-        }
-    });
-		
-			console.log(flowRate, tubeSize, pipingType)
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
 		}
+
+		if (currentTab !== tabName) {
+			const currentButton = document.getElementById(`btn-${currentTab}`);
+			currentButton.classList.remove('active');
+			
+			const newButton = document.getElementById(`btn-${tabName}`);
+			newButton.classList.add('active');
+			currentTab = tabName;
+		}
+
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
 
 	// Button events
+	pipingTypeSelect.addEventListener("change", changeTable) 
 	calculateButton.addEventListener("click", highlightTableCell);
-	calculateButton.addEventListener('click', () => {
-			const inputsToHighlight = document.querySelectorAll('#section-calculate input');
+	calculateButton.addEventListener("click", () => {
+		const inputsToHighlight = document.querySelectorAll('#section-calculate input');
+		inputsToHighlight.forEach(input => {
+			input.classList.add('highlight');
+		});
+		
+		setTimeout(() => {
 			inputsToHighlight.forEach(input => {
-				input.classList.add('highlight');
+			input.classList.remove('highlight');
 			});
-			
-			setTimeout(() => {
-				inputsToHighlight.forEach(input => {
-				input.classList.remove('highlight');
-				});
-			}, 1000); 
+		}, 1000); 
 	});
 	document.addEventListener('DOMContentLoaded', function () {
-			calculateButton.addEventListener('click', function () {
-				scrollToSectionCenter();
-			});
+		calculateButton.addEventListener('click', function () {
+			scrollToSectionCenter();
+		});
 	});
-
 </script> 
 </body>
 </html>

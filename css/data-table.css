@@ -98,3 +98,8 @@ tbody tr:nth-child(even) {
   border: 2px solid orange; 
   color: black; 
 }
+
+.tab-button.active {
+  background-color: grey;
+  color: #fff;
+}
