@@ -381,11 +381,10 @@ function calc_waterVelocity(form) {
     var flowRate = parseFloat(form.flowRate.value);
     var diameter = parseFloat(form.diameter.value);
 
-    var waterVelocity = (0.408 * flowRate) / Math.pow(diameter, 2);
+    var waterVelocity = (0.4085 * flowRate) / Math.pow(diameter, 2);
 
     form.waterVelocity.value = waterVelocity.toFixed(2);
 }
-
 
 function calc_pipeDiameter(form) {
     var pipeFlowRateUnits = parseFloat(form.pipeFlowRateUnits.value);
