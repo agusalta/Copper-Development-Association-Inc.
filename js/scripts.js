@@ -6,7 +6,6 @@ function hideKLM(classname){
     }
 }
 
-
 function calc_outletFriction(form) {
     var flowUnits = parseFloat(form.pipeFlowUnits.value);
     var diameterUnits = parseFloat(form.pipeDiameterUnits.value);
@@ -377,16 +376,16 @@ function calc_IrrigCostsP(form) {
     form.WaterCostPump.value = tmpResult.toFixed(2);
 }
 
+// Velocity FPS
 function calc_waterVelocity(form) {
-    var flowRateUnits = parseFloat(form.flowRateUnits.value);
-    var diameterUnits = parseFloat(form.diameterUnits.value);
-    var flowRate = parseFloat(form.flowRate.value) * flowRateUnits;
-    var diameter = parseFloat(form.diameter.value) / diameterUnits;
-    var precision = 2;
-    var waterVelocity = Math.pow(diameter, 2);
-    waterVelocity = (0.4085 * flowRate) / waterVelocity;
-    form.waterVelocity.value = waterVelocity.toFixed(precision);
+    var flowRate = parseFloat(form.flowRate.value);
+    var diameter = parseFloat(form.diameter.value);
+
+    var waterVelocity = (0.408 * flowRate) / Math.pow(diameter, 2);
+
+    form.waterVelocity.value = waterVelocity.toFixed(2);
 }
+
 
 function calc_pipeDiameter(form) {
     var pipeFlowRateUnits = parseFloat(form.pipeFlowRateUnits.value);
