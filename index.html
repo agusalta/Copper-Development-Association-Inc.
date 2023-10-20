@@ -92,6 +92,7 @@
 							<option value="0.250" selected="selected">1/4</option>
 							<option value="0.375">3/8</option>
 							<option value="0.500">1/2</option>
+							<option value="0.625">5/8</option>
 							<option value="0.750">3/4</option>
 							<option value="1.000">1</option>
 							<option value="1.250">1-1/4</option>
@@ -205,7 +206,7 @@
 							['0.250', '0.375', [
 								['0.305','0.035',],
 								['0.315','0.030',],
-								[			'',			'',],
+								['-','-',],
 								[			'',			'',],
 								]
 							],
@@ -226,7 +227,7 @@
 							['0.625', '0.750', [
 									['0.652','0.049'],
 									['0.666','0.042'],
-									[			'',			''],
+									['-','-'],
 									[			'',			''],
 								]
 							],
@@ -314,13 +315,20 @@
 									[			'',			''],
 								]
 							],
-							['10.000', 		'', [
-									[			'',			''],
-									[			'',			''],
-									[			'',			''],
-									[			'',			''],
+							['10.000','10.125', [
+									['9.449','0.338'],
+									['9.625','0.250'],
+									['9.701','0.212'],
+									['',''],
 								]
 							],
+							['12.000','12.125', [
+									['11.315','0.405'],
+									['11.565','0.280'],
+									['11.617','0.254'],
+									['',''],
+								]
+							]
 						];
 
 						function getOption(form) {
@@ -329,8 +337,9 @@
 							// Type K, L or M
 							typeIndex = document.querySelector('#xxx');
 
-							let pipeValues = copperpiping[1,[diameterIndex.selectedIndex + 1]];
+							let pipeValues = copperpiping[1,[diameterIndex.selectedIndex]];
 							nomTubeSize = pipeValues[0];
+
 							console.log(diameterIndex.selectedIndex)
 							console.log("pipeValues: " + pipeValues)
 
