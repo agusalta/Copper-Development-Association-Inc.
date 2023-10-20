@@ -254,6 +254,7 @@ function calc_pipefriction(form) {
         default:
             precision = 2;
     }
+    
     form.pressureLoss.value = pressureLoss.toFixed(precision);
 }
 
