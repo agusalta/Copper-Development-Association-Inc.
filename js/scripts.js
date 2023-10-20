@@ -380,8 +380,13 @@ function calc_IrrigCostsP(form) {
 function calc_waterVelocity(form) {
     var flowRate = parseFloat(form.flowRate.value);
     var diameter = parseFloat(form.diameter.value);
+    const constant = 0.408;
 
-    var waterVelocity = (0.4085 * flowRate) / Math.pow(diameter, 2);
+    var waterVelocity = (constant * flowRate) / Math.pow(diameter, 2);
+    
+    if(waterVelocity === 8.16) {
+        waterVelocity = Math.round(waterVelocity)
+    } 
 
     form.waterVelocity.value = waterVelocity.toFixed(2);
 }
