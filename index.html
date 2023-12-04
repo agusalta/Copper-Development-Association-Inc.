@@ -340,20 +340,20 @@
 							let pipeValues = copperpiping[1,[diameterIndex.selectedIndex]];
 							nomTubeSize = pipeValues[0];
 
-							console.log(diameterIndex.selectedIndex)
-							console.log("pipeValues: " + pipeValues)
+							// console.log(diameterIndex.selectedIndex)
+							// console.log("pipeValues: " + pipeValues)
 
 							outerDiameter = pipeValues[1];
-							console.log("outerDiameter: " + outerDiameter)
+							// console.log("outerDiameter: " + outerDiameter)
 
 							let pipeTypeValues = pipeValues[0,2][typeIndex.selectedIndex];
-							console.log("pypeTypeValues: " + pipeTypeValues)
+							// console.log("pypeTypeValues: " + pipeTypeValues)
 
 							innerDiameter = pipeTypeValues[0];
-							console.log('innerDiameter:' + innerDiameter);
+							// console.log('innerDiameter:' + innerDiameter);
 
 							wallThickness = pipeTypeValues[1];
-							console.log('wallThickness:' + wallThickness);
+							// console.log('wallThickness:' + wallThickness);
 
 							form.wallThickness.value = wallThickness;
 							form.outerDiameter.value = outerDiameter;
@@ -464,14 +464,14 @@
 				const iframe = document.getElementById(`scaled-frame-${table}`);
 				iframe.contentWindow.postMessage({ clearStyles: true }, '*');
 			}
-    	});
+    	});s
 		
-		console.log(flowRate, tubeSize, pipingType)
+		// console.log(flowRate, tubeSize, pipingType)
 	}
 
 	// Define a function to change the selected table based on user input
 	let currentTab = 'K';
-
+	let pipingType;
 	function changeTable(event) {
 		pipingType = pipingTypeSelect.options[pipingTypeSelect.selectedIndex].text;
 

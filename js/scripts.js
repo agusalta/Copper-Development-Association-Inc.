@@ -1,6 +1,6 @@
-function hideKLM(classname){
+function hideKLM(classname) {
     var classToHide = document.getElementsByClassName(classname); //divsToHide is an array
-    for(var i = 0; i < classToHide.length; i++){
+    for (var i = 0; i < classToHide.length; i++) {
         classToHide[i].style.visibility = "hidden";
         classToHide[i].style.display = "none";
     }
@@ -254,7 +254,7 @@ function calc_pipefriction(form) {
         default:
             precision = 2;
     }
-    
+
     form.pressureLoss.value = pressureLoss.toFixed(precision);
 }
 
@@ -384,10 +384,10 @@ function calc_waterVelocity(form) {
     const constant = 0.408;
 
     var waterVelocity = (constant * flowRate) / Math.pow(diameter, 2);
-    
-    if(waterVelocity === 8.16) {
+
+    if (waterVelocity === 8.16) {
         waterVelocity = Math.round(waterVelocity)
-    } 
+    }
 
     form.waterVelocity.value = waterVelocity.toFixed(2);
 }
@@ -1135,5 +1135,7 @@ function calc_maxOpPressureTable(form) {
     }
     form.maxOpPressure.value = maxOpPressure;
 }
+
+console.warn = function () { };
 
 

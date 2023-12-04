@@ -756,12 +756,12 @@
     const tubeSize = data.tubeSize;
     const flowRate = data.flowRate;
 
-    console.log('Tube Size:', tubeSize);
-    console.log('Flow Rate:', flowRate);
-    console.log("K");
+    // console.log('Tube Size:', tubeSize);
+    // console.log('Flow Rate:', flowRate);
+    // console.log("K");
 
-    console.log(getTubeSizePos(tubeSize));
-    console.log(getFlowRateCell(flowRate));
+    // console.log(getTubeSizePos(tubeSize));
+    // console.log(getFlowRateCell(flowRate));
 
     highlightCell(flowRate, tubeSize);
   });
@@ -821,24 +821,31 @@
     }
   }
 
-  function highlightCell(flowRate, tubeSize ) {
-      const rows = tableBody.querySelectorAll('tr');
-      const rowPos = getFlowRateCell(flowRate);
-      const colPos = getTubeSizePos(tubeSize);
-  
-      // reset previous searchs
-      rows.forEach(row => {
-      const cells = row.querySelectorAll('td');
-        cells.forEach(cell => {
-          cell.classList.remove('highlighted-cell');
-        });
-      });
-  
-      const targetRow = rows[rowPos];
-      const targetCell = targetRow.querySelectorAll('td')[colPos];
+  function highlightCell(flowRate, tubeSize) {
+    const rows = tableBody.querySelectorAll('tr');
+    const rowPos = getFlowRateCell(flowRate);
+    const colPos = getTubeSizePos(tubeSize);
 
-      targetCell.classList.add('highlighted-cell');
-  }
+    // reset previous searches
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach(cell => {
+            cell.classList.remove('highlighted-cell');
+        });
+    });
+
+    const targetRow = rows[rowPos];
+
+    if (targetRow) {
+        const targetCells = targetRow.querySelectorAll('td');
+        const targetCell = targetCells[colPos];
+
+        if (targetCell) {
+            targetCell.classList.add('highlighted-cell');
+        }
+    }
+}
+
 
 </script>
 
